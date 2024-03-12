@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yerong.blog.domain.Posts;
 import yerong.blog.dto.request.PostsRequestDto;
+import yerong.blog.dto.request.UpdatePostRequestDto;
 import yerong.blog.dto.response.PostsResponseDto;
 import yerong.blog.service.PostsService;
 
@@ -46,5 +47,11 @@ public class PostsApiController {
     public ResponseEntity<?> deletePost(@PathVariable Long id){
         postsService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/posts/{id}")
+    public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody UpdatePostRequestDto dto){
+        Posts updatedPost = postsService.update(id, dto);
+        return ResponseEntity.ok().body(updatedPost);
     }
 }
