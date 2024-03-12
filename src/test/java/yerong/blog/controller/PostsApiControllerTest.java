@@ -109,4 +109,30 @@ class PostsApiControllerTest {
                 .andExpect(jsonPath("$[0].title").value(title));
 
     }
+
+    @DisplayName("게시글 아이디로 조회")
+    @Test
+    public void findById () throws Exception{
+        //given
+        final String url = "/api/posts/{id}";
+        final String title = "hi";
+        final String content = "merong";
+
+        Posts savedPost = postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        //when
+        final ResultActions resultActions = mockMvc.perform(
+                get(url, savedPost.getId())
+        );
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title))
+        ;
+    }
 }
