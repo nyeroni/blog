@@ -17,13 +17,16 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import yerong.blog.domain.Posts;
 import yerong.blog.dto.PostsRequestDto;
+import yerong.blog.dto.PostsResponseDto;
 import yerong.blog.repository.PostsRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -78,5 +81,32 @@ class PostsApiControllerTest {
         assertThat(posts.size()).isEqualTo(1);
         assertThat(posts.get(0).getTitle()).isEqualTo(title);
         assertThat(posts.get(0).getContent()).isEqualTo(content);
+    }
+
+    @DisplayName("블로그 글 전체 조회")
+    @Test
+    public void findAllPosts() throws Exception{
+        //given
+        final String url = "/api/posts";
+        final String title = "hi";
+        final String content = "merong";
+
+        postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        //when
+        final ResultActions resultActions = mockMvc.perform(
+                get(url)
+                        .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value(content))
+                .andExpect(jsonPath("$[0].title").value(title));
+
     }
 }
