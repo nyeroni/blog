@@ -16,13 +16,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import yerong.blog.domain.Posts;
 import yerong.blog.dto.request.PostsRequestDto;
+import yerong.blog.dto.request.UpdatePostRequestDto;
 import yerong.blog.repository.PostsRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,7 +66,7 @@ class PostsApiControllerTest {
         //요청 전송
         ResultActions resultActions = mockMvc.perform(
                 post(url)
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(requestBody)
         );
 
@@ -154,5 +154,38 @@ class PostsApiControllerTest {
         //then
         List<Posts> postsList = postsRepository.findAll();
         assertThat(postsList).isEmpty();
+    }
+
+    @DisplayName("게시글 수정")
+    @Test
+    public void updatePost() throws  Exception{
+        //given
+        final String url = "/api/posts/{id}";
+        final String title = "hi";
+        final String content = "merong";
+
+        Posts savedPost = postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        final String updateTitle = "updateTitle";
+        final String updateContent = "updateContent";
+
+        UpdatePostRequestDto updatePostRequestDto = new UpdatePostRequestDto(updateTitle, updateContent);
+
+        //when
+        ResultActions resultActions = mockMvc.perform(
+                put(url, savedPost.getId())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(updatePostRequestDto))
+        );
+
+        //then
+        resultActions.andExpect(status().isOk());
+
+        Posts post = postsRepository.findById(savedPost.getId()).get();
+        assertThat(post.getTitle()).isEqualTo(updateTitle);
+        assertThat(post.getContent()).isEqualTo(updateContent);
     }
 }
