@@ -3,10 +3,7 @@ package yerong.blog.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import yerong.blog.domain.Posts;
 import yerong.blog.dto.PostsRequestDto;
 import yerong.blog.dto.PostsResponseDto;
@@ -37,5 +34,12 @@ public class PostsApiController {
                 .toList();
 
         return ResponseEntity.ok().body(postsResponseDtos);
+    }
+
+    @GetMapping("/api/posts/{id}")
+    public ResponseEntity<?> findPost(@PathVariable Long id){
+        Posts post = postsService.findById(id);
+
+        return ResponseEntity.ok().body(new PostsResponseDto(post));
     }
 }
