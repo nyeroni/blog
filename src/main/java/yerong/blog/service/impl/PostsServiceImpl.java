@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yerong.blog.domain.Posts;
-import yerong.blog.dto.PostsRequestDto;
+import yerong.blog.dto.request.PostsRequestDto;
 import yerong.blog.repository.PostsRepository;
 import yerong.blog.service.PostsService;
 

@@ -1,4 +1,4 @@
-package yerong.blog.dto;
+package yerong.blog.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

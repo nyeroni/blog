@@ -5,12 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yerong.blog.domain.Posts;
-import yerong.blog.dto.PostsRequestDto;
-import yerong.blog.dto.PostsResponseDto;
+import yerong.blog.dto.request.PostsRequestDto;
+import yerong.blog.dto.response.PostsResponseDto;
 import yerong.blog.service.PostsService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor

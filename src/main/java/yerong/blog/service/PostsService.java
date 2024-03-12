@@ -1,7 +1,7 @@
 package yerong.blog.service;
 
 import yerong.blog.domain.Posts;
-import yerong.blog.dto.PostsRequestDto;
+import yerong.blog.dto.request.PostsRequestDto;
 
 import java.util.List;
 
