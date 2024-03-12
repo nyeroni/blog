@@ -30,6 +30,6 @@ public class PostsServiceImpl implements PostsService {
     @Transactional
     public Posts findById(Long id){
         return postsRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원 Id 입니다."));
+                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 게시글 Id 입니다."));
     }
 }
