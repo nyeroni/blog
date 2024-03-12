@@ -25,4 +25,11 @@ public class PostsServiceImpl implements PostsService {
     public List<Posts> findAll (){
         return postsRepository.findAll();
     }
+
+    @Override
+    @Transactional
+    public Posts findById(Long id){
+        return postsRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원 Id 입니다."));
+    }
 }
