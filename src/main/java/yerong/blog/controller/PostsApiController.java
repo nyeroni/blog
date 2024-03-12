@@ -42,11 +42,4 @@ public class PostsApiController {
 
         return ResponseEntity.ok().body(new PostsResponseDto(post));
     }
-
-    @DeleteMapping("/api/articles/{id}")
-    public ResponseEntity<?> deletePost (@PathVariable Long id){
-        postsService.delete(id);
-
-        return ResponseEntity.ok().build();
-    }
 }
