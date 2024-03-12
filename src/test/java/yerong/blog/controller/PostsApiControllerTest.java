@@ -1,8 +1,7 @@
 package yerong.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.aspectj.lang.annotation.Before;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,19 +10,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import yerong.blog.domain.Posts;
 import yerong.blog.dto.PostsRequestDto;
-import yerong.blog.dto.PostsResponseDto;
 import yerong.blog.repository.PostsRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -134,5 +131,28 @@ class PostsApiControllerTest {
                 .andExpect(jsonPath("$.content").value(content))
                 .andExpect(jsonPath("$.title").value(title))
         ;
+    }
+
+    @DisplayName("게시글 삭제")
+    @Test
+    public void delete() throws Exception{
+        //given
+        final String url = "/api/posts/{id}";
+        final String title = "hi";
+        final String content = "merong";
+
+        Posts savedPost = postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        //when
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete(url, savedPost.getId())
+        ).andExpect(status().isOk());
+
+        //then
+        List<Posts> postsList = postsRepository.findAll();
+        assertThat(postsList).isEmpty();
     }
 }
