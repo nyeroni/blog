@@ -32,4 +32,10 @@ public class PostsServiceImpl implements PostsService {
         return postsRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 게시글 Id 입니다."));
     }
+
+    @Override
+    @Transactional
+    public void delete(Long id){
+        postsRepository.deleteById(id);
+    }
 }
