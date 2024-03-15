@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 import yerong.blog.domain.Posts;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 @Setter
 public class PostListViewResponse {
 
-    private final Long id;
-    private final String title;
-    private final String content;
-
+    private Long id;
+    private String title;
+    private String content;
     public PostListViewResponse(Posts posts){
         this.id = posts.getId();
         this.title = posts.getTitle();
