@@ -2,6 +2,7 @@ package yerong.blog.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import yerong.blog.domain.Posts;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @Setter
+@NoArgsConstructor
 public class PostViewResponse {
 
     private Long id;
