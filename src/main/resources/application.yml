@@ -17,7 +17,8 @@ spring:
   sql:
     init:
       mode: always
-
+  profiles:
+    include: oauth
 logging:
   level:
     org.hibernate.SQL : debug
