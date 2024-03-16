@@ -1,8 +1,8 @@
-package yerong.blog.dto.response;
+package yerong.blog.dto.response.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import yerong.blog.domain.Posts;
+import yerong.blog.domain.post.Posts;
 
 @Getter
 @AllArgsConstructor

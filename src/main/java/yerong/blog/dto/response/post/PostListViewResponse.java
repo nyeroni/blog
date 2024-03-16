@@ -1,28 +1,21 @@
-package yerong.blog.dto.response;
+package yerong.blog.dto.response.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import yerong.blog.domain.Posts;
-
-import java.time.LocalDateTime;
+import yerong.blog.domain.post.Posts;
 
 @Getter
 @AllArgsConstructor
 @Setter
-@NoArgsConstructor
-public class PostViewResponse {
+public class PostListViewResponse {
 
     private Long id;
     private String title;
     private String content;
-    private LocalDateTime createdAt;
-
-    public PostViewResponse(Posts posts){
+    public PostListViewResponse(Posts posts){
         this.id = posts.getId();
         this.title = posts.getTitle();
         this.content = posts.getContent();
-        this.createdAt = posts.getCreatedAt();
     }
 }

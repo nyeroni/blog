@@ -1,8 +1,8 @@
-package yerong.blog.service;
+package yerong.blog.service.post;
 
-import yerong.blog.domain.Posts;
-import yerong.blog.dto.request.PostsRequestDto;
-import yerong.blog.dto.request.UpdatePostRequestDto;
+import yerong.blog.domain.post.Posts;
+import yerong.blog.dto.request.post.PostsRequestDto;
+import yerong.blog.dto.request.post.UpdatePostRequestDto;
 
 import java.util.List;
 

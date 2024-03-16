@@ -14,10 +14,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import yerong.blog.domain.Posts;
+import yerong.blog.domain.post.Posts;
 import yerong.blog.dto.request.PostsRequestDto;
 import yerong.blog.dto.request.UpdatePostRequestDto;
-import yerong.blog.repository.PostsRepository;
+import yerong.blog.repository.post.PostsRepository;
 
 import java.util.List;
 

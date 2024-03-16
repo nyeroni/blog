@@ -1,9 +1,9 @@
-package yerong.blog.dto.request;
+package yerong.blog.dto.request.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import yerong.blog.domain.Posts;
+import yerong.blog.domain.post.Posts;
 
 @Getter
 @NoArgsConstructor

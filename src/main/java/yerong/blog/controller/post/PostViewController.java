@@ -1,4 +1,4 @@
-package yerong.blog.controller;
+package yerong.blog.controller.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import yerong.blog.domain.Posts;
-import yerong.blog.dto.response.PostListViewResponse;
-import yerong.blog.dto.response.PostViewResponse;
-import yerong.blog.service.PostsService;
+import yerong.blog.domain.post.Posts;
+import yerong.blog.dto.response.post.PostListViewResponse;
+import yerong.blog.dto.response.post.PostViewResponse;
+import yerong.blog.service.post.PostsService;
 
 import java.util.List;
 

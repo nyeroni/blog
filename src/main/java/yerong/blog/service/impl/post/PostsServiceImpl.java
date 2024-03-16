@@ -1,13 +1,13 @@
-package yerong.blog.service.impl;
+package yerong.blog.service.impl.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import yerong.blog.domain.Posts;
-import yerong.blog.dto.request.PostsRequestDto;
-import yerong.blog.dto.request.UpdatePostRequestDto;
-import yerong.blog.repository.PostsRepository;
-import yerong.blog.service.PostsService;
+import yerong.blog.domain.post.Posts;
+import yerong.blog.dto.request.post.PostsRequestDto;
+import yerong.blog.dto.request.post.UpdatePostRequestDto;
+import yerong.blog.repository.post.PostsRepository;
+import yerong.blog.service.post.PostsService;
 
 import java.util.List;
 

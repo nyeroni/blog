@@ -1,14 +1,14 @@
-package yerong.blog.controller;
+package yerong.blog.controller.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yerong.blog.domain.Posts;
-import yerong.blog.dto.request.PostsRequestDto;
-import yerong.blog.dto.request.UpdatePostRequestDto;
-import yerong.blog.dto.response.PostsResponseDto;
-import yerong.blog.service.PostsService;
+import yerong.blog.domain.post.Posts;
+import yerong.blog.dto.request.post.PostsRequestDto;
+import yerong.blog.dto.request.post.UpdatePostRequestDto;
+import yerong.blog.dto.response.post.PostsResponseDto;
+import yerong.blog.service.post.PostsService;
 
 import java.util.List;
 
