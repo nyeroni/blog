@@ -26,4 +26,10 @@ public class MemberServiceImpl implements MemberService {
                 .build()).getId();
 
     }
+
+    @Override
+    @Transactional
+    public Member findById(Long memberId){
+        return memberRepository.findById(memberId).orElseThrow(()-> new IllegalArgumentException("찾을 수 없는 회원 id입니다."));
+    }
 }

@@ -54,10 +54,10 @@ public class TokenProvider {
         }
     }
 
-    public Authentication getAuthentication(String token, Member member){
+    public Authentication getAuthentication(String token){
         Claims claims = getClaims(token);
         Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority(Role.USER.getKey()));
-        return new UsernamePasswordAuthenticationToken(new PrincipalDetails(member), token, authorities);
+        return new UsernamePasswordAuthenticationToken(new User(claims.getSubject(), "", authorities), token, authorities);
     }
 
     public Long getMemberId(String token){

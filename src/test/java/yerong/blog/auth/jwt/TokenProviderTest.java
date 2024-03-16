@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import yerong.blog.auth.princiapl.PrincipalDetails;
 import yerong.blog.domain.member.Member;
 import yerong.blog.domain.member.Role;
@@ -85,20 +86,16 @@ public class TokenProviderTest {
     @Test
     public void getAuthentication() throws Exception{
         //given
-        Member member = Member.builder()
-                .email("user@email.com")
-                .password("1234") // 이 비밀번호는 실제로 사용되는 비밀번호여야 합니다.
-                .role(Role.USER)
-                .build();
+        String email = "user@email.com";
         String token = JwtFactory.builder()
-                .subject(member.getEmail())
+                .subject(email)
                 .build()
                 .createToken(jwtProperties);
         //when
-        Authentication authentication = tokenProvider.getAuthentication(token,member );
+        Authentication authentication = tokenProvider.getAuthentication(token);
 
         //then
-        assertThat(((PrincipalDetails) authentication.getPrincipal()).getUsername()).isEqualTo(member.getEmail());
+        assertThat(((UserDetails) authentication.getPrincipal()).getUsername()).isEqualTo(email);
 
     }
 
