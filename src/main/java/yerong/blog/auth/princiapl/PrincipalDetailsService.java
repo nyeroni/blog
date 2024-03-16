@@ -1,4 +1,4 @@
-package yerong.blog.auth;
+package yerong.blog.auth.princiapl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

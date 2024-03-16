@@ -1,4 +1,4 @@
-package yerong.blog.auth;
+package yerong.blog.auth.princiapl;
 
 import lombok.Getter;
 import lombok.Setter;
