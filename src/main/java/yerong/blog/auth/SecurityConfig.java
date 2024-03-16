@@ -1,6 +1,7 @@
 package yerong.blog.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -22,14 +24,6 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class SecurityConfig {
 
     private final PrincipalDetailsService principalDetailsService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Bean
-    public WebSecurityCustomizer configure(){
-        return (web -> web.ignoring()
-                .requestMatchers(toH2Console())
-                .requestMatchers("/static/**"));
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -39,26 +33,31 @@ public class SecurityConfig {
                         authorizationRequest.requestMatchers(
                                 AntPathRequestMatcher.antMatcher("/login"),
                                 AntPathRequestMatcher.antMatcher("/signup"),
-                                AntPathRequestMatcher.antMatcher("/user")
+                                AntPathRequestMatcher.antMatcher("/user"),
+                                AntPathRequestMatcher.antMatcher("/h2-console/**"),
+                                AntPathRequestMatcher.antMatcher("/js/**"),
+                                AntPathRequestMatcher.antMatcher("/css/**")
                                 ).permitAll().anyRequest().authenticated()
                 ).formLogin(formConfig -> formConfig.loginPage("/login")
-                        .defaultSuccessUrl("/articles"))
+                        .defaultSuccessUrl("/posts"))
                 .logout(logoutConfig-> logoutConfig.logoutSuccessUrl("/login").invalidateHttpSession(true))
                 .build();
     }
 
     @Bean
-    public BCryptPasswordEncoder encoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception{
+    public AuthenticationManager authenticationManager(HttpSecurity http,BCryptPasswordEncoder bCryptPasswordEncoder, PrincipalDetailsService principalDetailsService) throws Exception{
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder
                 .userDetailsService(principalDetailsService)
                 .passwordEncoder(bCryptPasswordEncoder);
-                return authenticationManagerBuilder.build();
+        return authenticationManagerBuilder.build();
     }
+
+
 }

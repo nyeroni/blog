@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yerong.blog.domain.member.Member;
+import yerong.blog.domain.member.Role;
 import yerong.blog.dto.request.LoginRequestDto;
 import yerong.blog.repository.member.MemberRepository;
 import yerong.blog.service.member.MemberService;
@@ -21,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.save(Member.builder()
                 .email(loginRequest.getEmail())
                 .password(passwordEncoder.encode(loginRequest.getPassword()))
+                .role(Role.USER)
                 .build()).getId();
 
     }
