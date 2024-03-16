@@ -15,8 +15,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import yerong.blog.domain.post.Posts;
-import yerong.blog.dto.request.PostsRequestDto;
-import yerong.blog.dto.request.UpdatePostRequestDto;
+
+import yerong.blog.dto.request.post.PostsRequestDto;
+import yerong.blog.dto.request.post.UpdatePostRequestDto;
 import yerong.blog.repository.post.PostsRepository;
 
 import java.util.List;
