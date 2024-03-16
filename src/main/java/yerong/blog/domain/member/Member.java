@@ -11,7 +11,7 @@ import yerong.blog.domain.BaseTimeEntity;
 public class Member extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", updatable = false)
     private Long id;
 
