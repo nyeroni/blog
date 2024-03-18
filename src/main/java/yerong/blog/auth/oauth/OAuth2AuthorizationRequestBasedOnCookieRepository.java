@@ -37,3 +37,4 @@ public class OAuth2AuthorizationRequestBasedOnCookieRepository implements Author
         CookieUtil.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
     }
 }
+

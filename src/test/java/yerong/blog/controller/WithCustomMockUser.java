@@ -14,3 +14,4 @@ public @interface WithCustomMockUser {
     String email () default "user@naver.com";
     String password () default  "1234";
 }
+
