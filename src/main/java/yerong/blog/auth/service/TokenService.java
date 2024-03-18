@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yerong.blog.auth.jwt.TokenProvider;
 import yerong.blog.domain.member.Member;
-import yerong.blog.service.member.MemberService;
+import yerong.blog.service.MemberService;
 
 import java.time.Duration;
 

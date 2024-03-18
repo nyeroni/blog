@@ -1,4 +1,4 @@
-package yerong.blog.service.post;
+package yerong.blog.service;
 
 import yerong.blog.domain.post.Posts;
 import yerong.blog.dto.request.post.PostsRequestDto;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostsService {
 
-    Posts save(PostsRequestDto postsRequestDto);
+    Posts save(PostsRequestDto postsRequestDto, String email);
     List<Posts> findAll ();
     Posts findById(Long id);
     void delete(Long id);

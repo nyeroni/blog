@@ -9,20 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import yerong.blog.auth.princiapl.PrincipalDetails;
+import yerong.blog.domain.member.Member;
+import yerong.blog.domain.member.Role;
 import yerong.blog.domain.post.Posts;
 
 import yerong.blog.dto.request.post.PostsRequestDto;
 import yerong.blog.dto.request.post.UpdatePostRequestDto;
+import yerong.blog.repository.member.MemberRepository;
 import yerong.blog.repository.post.PostsRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +51,9 @@ class PostsApiControllerTest {
     @Autowired
     private PostsRepository postsRepository;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @BeforeEach
     public void mockSetUp(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
@@ -53,6 +63,7 @@ class PostsApiControllerTest {
 
     @DisplayName("글 추가 성공")
     @Test
+    @WithCustomMockUser
     public void addPost() throws Exception{
         //given
         final String url = "/api/posts";
@@ -60,7 +71,6 @@ class PostsApiControllerTest {
         final String content = "merong";
         final PostsRequestDto postsRequestDto = new PostsRequestDto(title, content);
 
-        //객체 JSON으로 직렬화
         final String requestBody = objectMapper.writeValueAsString(postsRequestDto);
 
         //when

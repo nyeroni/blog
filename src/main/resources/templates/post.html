@@ -18,12 +18,12 @@
                 <input type="hidden" id="post-id" th:value="${post.id}">
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1" th:text="${post.title}"></h1>
-                    <div class="text-muted fst-italic mb-2" th:text="|Posted on ${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}|"></div>
+                    <div class="text-muted fst-italic mb-2" th:text="|Posted on ${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')} By ${post.email}|"></div>
                 </header>
                 <section class="mb-5">
                     <p class="fs-5 mb-4" th:text="${post.content}"></p>
                 </section>
-                <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-post?id={postId} (postId=${post.id})}'|" class="btn btn-primary btn-sm">수정</button>
+                <button type="button" id="modify-btn" th:if="${post.email == post.canEdit}" th:onclick="|location.href='@{/new-post?id={postId} (postId=${post.id})}'|" class="btn btn-primary btn-sm">수정</button>
                 <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>
             </article>
         </div>

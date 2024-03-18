@@ -6,11 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import yerong.blog.domain.member.Member;
 import yerong.blog.domain.post.Posts;
 import yerong.blog.dto.response.post.PostListViewResponse;
 import yerong.blog.dto.response.post.PostViewResponse;
-import yerong.blog.service.post.PostsService;
+import yerong.blog.service.MemberService;
+import yerong.blog.service.PostsService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,7 +21,12 @@ import java.util.List;
 public class PostViewController {
 
     private final PostsService postsService;
+    private final MemberService memberService;
 
+    @GetMapping("/")
+    public String index(){
+        return "redirect:/posts";
+    }
     @GetMapping("/posts")
     public String getPosts(Model model){
         List<PostListViewResponse> posts = postsService.findAll().stream()
@@ -30,9 +38,13 @@ public class PostViewController {
     }
 
     @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable Long id,  Model model){
+    public String getPost(@PathVariable Long id, Model model, Principal principal){
         Posts post = postsService.findById(id);
-        model.addAttribute("post", new PostViewResponse(post));
+        String email = principal.getName();
+        Member member = memberService.findByEmail(email);
+
+        boolean canEdit = member.getId().equals(post.getMember().getId());
+        model.addAttribute("post", new PostViewResponse(post, canEdit));
         return "post";
     }
 

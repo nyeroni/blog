@@ -1,4 +1,4 @@
-package yerong.blog.dto.request;
+package yerong.blog.auth.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,10 @@
-package yerong.blog.service.member;
+package yerong.blog.service;
 
 import yerong.blog.domain.member.Member;
-import yerong.blog.dto.request.LoginRequestDto;
+import yerong.blog.auth.dto.request.LoginRequestDto;
 
 public interface MemberService {
     Long save(LoginRequestDto loginRequest);
     Member findById(Long memberId);
+    Member findByEmail(String email);
 }
